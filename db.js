@@ -1,8 +1,10 @@
-const {Schema} = require("mongoose")
+const mongoose = require("mongoose");
+require('dotenv').config();
+mongoose.connect(process.env.MONGODB_URI);
 const Schema = mongoose.Schema;
-const ObjectId = mongoose.Types.OjectId
+const ObjectId = mongoose.Types.ObjectId;
 
-const userSchema = Schema(
+const userSchema = new Schema(
     {
         email:{type:String , unique:true},
         password:String,
@@ -11,7 +13,7 @@ const userSchema = Schema(
         
     }
 )
-const courseSchema = Schema(
+const courseSchema = new  Schema(
     {
         title:String,
         description:String,
@@ -20,7 +22,7 @@ const courseSchema = Schema(
         creatorId:ObjectId
     }
 )
-const adminSchema = Schema(
+const adminSchema = new Schema(
     {
         email:{type:String , unique:true},
         password:String,
@@ -28,7 +30,7 @@ const adminSchema = Schema(
         lastName:String
     }
 )
-const purchaseSchema = Schema(
+const purchaseSchema = new Schema(
     {
         userId:ObjectId,
         courseId:ObjectId
@@ -36,16 +38,15 @@ const purchaseSchema = Schema(
     }
 )
 
-const userModel = mongoose.Model("user",userSchema)
-const courseModel = mongoose.Model("admin",courseSchema)
-const adminModel = mongoose.Model("course",adminSchema)
-const purchaseModel = mongoose.Model("purchase",purchaseSchema)
+const userModel = mongoose.model("user", userSchema);
+const courseModel = mongoose.model("course", courseSchema);
+const adminModel = mongoose.model("admin", adminSchema);
+const purchaseModel = mongoose.model("purchase", purchaseSchema);
 
 
-module.exports{
+module.exports = {
     userModel,
     courseModel,
     adminModel,
     purchaseModel
-    
-}
+};
