@@ -12,5 +12,5 @@ userRouter.get("/purchases",(req,res) => {
 })
 
 module.exports =  {
-    userRouteR:userRouter
+    userRouter:userRouter
 }
